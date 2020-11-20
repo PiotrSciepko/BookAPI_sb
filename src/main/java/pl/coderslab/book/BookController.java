@@ -1,19 +1,21 @@
 package pl.coderslab.book;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/books")
 public class BookController {
 
-    private final MemoryBookService memoryBookService;
+    private final BookService bookService;
 
     @Autowired
-    public BookController(MemoryBookService memoryBookService) {
-        this.memoryBookService = memoryBookService;
+    public BookController(@Qualifier("jpaBookService") BookService bookService) {
+        this.bookService = bookService;
     }
 
     @RequestMapping("/helloBook")
@@ -23,31 +25,31 @@ public class BookController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public List<Book> listAllBooks() {
-        return memoryBookService.listAllBooks();
+    public List<Book> getBooks() {
+        return bookService.getBooks();
     }
 
     @PostMapping("")
     public List<Book> addBook(@RequestBody Book book) {
-        memoryBookService.addBook(book);
-        return memoryBookService.listAllBooks();
+       bookService.addBook(book);
+        return bookService.getBooks();
     }
 
     @GetMapping("/{bookId}")
     public Book getBook(@PathVariable("bookId") long bookId) {
-        return memoryBookService.getBook(bookId);
+        return bookService.getBook(bookId);
     }
 
     @DeleteMapping("/{bookId}")
     public List<Book> deleteBook(@PathVariable("bookId") long bookId) {
-        memoryBookService.deleteBook(bookId);
-        return memoryBookService.listAllBooks();
+        bookService.deleteBook(bookId);
+        return bookService.getBooks();
     }
 
     @PutMapping("")
     public List<Book> updateBook(@RequestBody Book book) {
-        memoryBookService.updateBook(book);
-        return memoryBookService.listAllBooks();
+        bookService.updateBook(book);
+        return bookService.getBooks();
     }
 
 

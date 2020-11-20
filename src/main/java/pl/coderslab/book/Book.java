@@ -2,6 +2,11 @@ package pl.coderslab.book;
 
 import lombok.*;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "books")
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -9,6 +14,8 @@ import lombok.*;
 @ToString
 
 public class Book {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String isbn;
     private String title;
