@@ -3,6 +3,7 @@ package pl.coderslab.book;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class JpaBookService implements BookService{
@@ -20,7 +21,8 @@ public class JpaBookService implements BookService{
 
     @Override
     public Book getBook(long id) {
-        return bookRepository.findById(id).get();
+        Optional<Book> optionalBook = bookRepository.findById(id);
+        return optionalBook.orElse(null);
     }
 
     @Override
@@ -35,5 +37,6 @@ public class JpaBookService implements BookService{
 
     @Override
     public void updateBook(Book book) {
+        bookRepository.save(book);
     }
 }
