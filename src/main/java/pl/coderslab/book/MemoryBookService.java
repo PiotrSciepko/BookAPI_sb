@@ -36,7 +36,6 @@ public class MemoryBookService {
     public void addBook(Book book) {
         book.setId(lastId);
         lastId += 1;
-        System.out.println(book);
         books.add(book);
     }
 

@@ -46,7 +46,6 @@ public class BookController {
 
     @PutMapping("")
     public List<Book> updateBook(@RequestBody Book book) {
-        System.out.println("in put");
         memoryBookService.updateBook(book);
         return memoryBookService.listAllBooks();
     }
