@@ -3,7 +3,6 @@ package pl.coderslab.book;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class JpaBookService implements BookService{
@@ -32,11 +31,9 @@ public class JpaBookService implements BookService{
     @Override
     public void deleteBook(long id) {
         bookRepository.deleteById(id);
-
     }
 
     @Override
     public void updateBook(Book book) {
-
     }
 }
